@@ -1,0 +1,16 @@
+spring:
+  main:
+    banner-mode: off
+  config:
+    import: optional:file:env.yaml # Load env variables
+
+  datasource:
+    #NOTE: stringtype=unspecified: lets Postgres guess the right-side type and convert everything adequately (CAST ENUM)
+    url: jdbc:postgresql://${DB_HOST}/${DB_NAME}?stringtype=unspecified&reWriteBatchedInserts=true
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
