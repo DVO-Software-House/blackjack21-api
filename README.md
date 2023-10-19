@@ -6,6 +6,8 @@ For building and running the application you need:
 
 - [JDK 17](https://www.azul.com/downloads/#downloads-table-zulu)
 - [Maven 3.6.3 or later](https://maven.apache.org)
+- [Docker desktop](https://www.docker.com/products/docker-desktop/)
+- [Docker compose](https://docs.docker.com/compose/) - Included in docker desktop
 
 ## Running the application locally
 

@@ -6,10 +6,11 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
 @EntityScan("com.dvosoftwarehouse.blackjack21.api.entities")
-public class Application {
+public class Blackjack21Api {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		System.out.printf("Hibernate Version %s\n", org.hibernate.Version.getVersionString());
+		SpringApplication.run(Blackjack21Api.class, args);
 	}
 
 }

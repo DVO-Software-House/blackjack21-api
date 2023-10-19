@@ -8,29 +8,24 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
-@Entity
-@Table(name = "card")
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Entity(name = "card")
 public class Card {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id")
-  private int id;
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "id", columnDefinition = "smallserial")
+  private short id;
 
-  @Column(name = "value")
-  private int value;
+  @Column(name = "value", nullable = false, updatable = false, columnDefinition = "smallint")
+  private short value;
 
   @Enumerated(EnumType.STRING)
-  @Column(name = "suit")
+  @Column(name = "suit", length = 10, nullable = false, updatable = false)
+  @NonNull
   private CardSuitEnum suit;
 
-  @Column(name = "image_url", columnDefinition = "TEXT")
-  private String imageUrl;
+  @Column(name = "code", length = 2, unique = true, nullable = false, updatable = false)
+  @NonNull
+  private String code;
 }
