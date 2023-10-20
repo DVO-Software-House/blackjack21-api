@@ -1,11 +1,10 @@
 package com.dvosoftwarehouse.blackjack21.api.entities;
 
-import io.hypersistence.utils.hibernate.id.BatchSequenceGenerator;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
 import lombok.NonNull;
 import org.hibernate.annotations.GenericGenerator;
@@ -17,7 +16,7 @@ public class Player {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "player_id_seq")
   @GenericGenerator(
       name = "player_id_seq",
-      type = BatchSequenceGenerator.class,
+      strategy = "com.vladmihalcea.hibernate.id.BatchSequenceGenerator",
       parameters = {
           @Parameter(name = "sequence", value = "player_id_seq"),
           @Parameter(name = "fetch_size", value = "5")

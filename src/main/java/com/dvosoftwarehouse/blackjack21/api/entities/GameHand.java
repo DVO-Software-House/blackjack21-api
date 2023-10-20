@@ -1,6 +1,6 @@
 package com.dvosoftwarehouse.blackjack21.api.entities;
 
-import com.dvosoftwarehouse.blackjack21.api.enums.GameStatusEnum;
+import com.dvosoftwarehouse.blackjack21.api.enums.PlayerHandStatusEnum;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -19,42 +19,48 @@ import lombok.NonNull;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
-@Entity(name = "game")
-public class Game {
+@Entity(name = "game_hand")
+public class GameHand {
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "game_id_seq")
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "game_hand_id_seq")
   @GenericGenerator(
-      name = "game_id_seq",
+      name = "game_hand_id_seq",
       strategy = "com.vladmihalcea.hibernate.id.BatchSequenceGenerator",
       parameters = {
-          @Parameter(name = "sequence", value = "game_id_seq"),
+          @Parameter(name = "sequence", value = "game_hand_id_seq"),
           @Parameter(name = "fetch_size", value = "5")
       })
   @NonNull
   private Long id;
 
-  @Column(name = "label", unique = true, nullable = false)
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "game_id", nullable = false, updatable = false)
   @NonNull
-  private String label;
-
-  @Column(name = "num_of_decks", columnDefinition = "smallint", nullable = false, updatable = false)
-  private short numOfDecks;
-
-  @Enumerated(EnumType.STRING)
-  @Column(name = "status", length = 20, nullable = false)
-  @NonNull
-  private GameStatusEnum status;
+  private Game game;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "started_by_player_id", nullable = false, updatable = false)
-  @NonNull
-  private Player startedByPlayer;
+  @JoinColumn(name = "player_id", updatable = false)
+  private Player player;
 
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "game")
+  @Enumerated(EnumType.STRING)
+  @Column(name = "status", length = 10, nullable = false)
+  @NonNull
+  private PlayerHandStatusEnum status;
+
+  @Column(name = "position", columnDefinition = "smallint", nullable = false, updatable = false)
+  private short position;
+
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "game_hand")
   @Transient
-  private List<GameDeckCard> gameDeckCards;
+  private List<GameHandEvent> gameHandEvents;
+
+  @Column(name = "is_dealer", nullable = false, updatable = false)
+  private boolean isDealer;
 
   @Column(name = "created_at", nullable = false, updatable = false)
   @NonNull
   private LocalDateTime createdAt;
+
+  @Column(name = "updated_at")
+  private LocalDateTime updatedAt;
 }
