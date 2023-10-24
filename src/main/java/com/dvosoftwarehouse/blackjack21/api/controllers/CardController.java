@@ -24,9 +24,9 @@ public class CardController {
 
   @GetMapping("/card/code/{card-code}")
   public ResponseEntity<Card> getCardByCode(
-      @PathVariable("card-code") @Size final String cardCode) {
+      @PathVariable("card-code") @Size(min = 2, max = 2) final String cardCode) {
     final Optional<Card> cardOptional = this.cardService.findCardByCode(cardCode);
-    if (cardOptional.isEmpty()) throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+    if (cardOptional.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
     return ResponseEntity.ok().body(cardOptional.get());
   }

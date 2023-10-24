@@ -8,10 +8,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity(name = "game_deck_card")
 public class GameDeckCard {
   @Id
@@ -23,7 +31,6 @@ public class GameDeckCard {
           @Parameter(name = "sequence", value = "game_deck_card_id_seq"),
           @Parameter(name = "fetch_size", value = "5")
       })
-  @NonNull
   private Long id;
 
   @ManyToOne(fetch = FetchType.LAZY)
@@ -37,7 +44,7 @@ public class GameDeckCard {
   private Card card;
 
   @Column(name = "position", columnDefinition = "smallint", nullable = false, updatable = false)
-  private short position;
+  private Short position;
 }
 
 

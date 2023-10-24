@@ -28,7 +28,6 @@ public class GameHandEvent {
           @Parameter(name = "sequence", value = "game_hand_event_id_seq"),
           @Parameter(name = "fetch_size", value = "5")
       })
-  @NonNull
   private Long id;
 
   @ManyToOne(fetch = FetchType.LAZY)
