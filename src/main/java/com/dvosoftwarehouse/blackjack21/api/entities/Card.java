@@ -19,10 +19,10 @@ public class Card {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id", columnDefinition = "smallserial")
-  private short id;
+  private Short id;
 
   @Column(name = "value", nullable = false, updatable = false, columnDefinition = "smallint")
-  private short value;
+  private Short value;
 
   @Enumerated(EnumType.STRING)
   @Column(name = "suit", length = 10, nullable = false, updatable = false)

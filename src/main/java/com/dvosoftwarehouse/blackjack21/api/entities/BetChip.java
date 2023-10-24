@@ -12,10 +12,10 @@ public class BetChip {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id", columnDefinition = "smallserial")
-  private short id;
+  private Short id;
 
   @Column(name = "value", nullable = false)
-  private int value;
+  private Integer value;
 
   @Column(name = "label", length = 8, nullable = false)
   @NonNull

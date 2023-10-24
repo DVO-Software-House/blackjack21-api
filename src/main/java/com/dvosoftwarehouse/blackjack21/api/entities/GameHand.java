@@ -30,7 +30,6 @@ public class GameHand {
           @Parameter(name = "sequence", value = "game_hand_id_seq"),
           @Parameter(name = "fetch_size", value = "5")
       })
-  @NonNull
   private Long id;
 
   @ManyToOne(fetch = FetchType.LAZY)
@@ -55,7 +54,7 @@ public class GameHand {
   private List<GameHandEvent> gameHandEvents;
 
   @Column(name = "is_dealer", nullable = false, updatable = false)
-  private boolean isDealer;
+  private Boolean isDealer;
 
   @Column(name = "created_at", nullable = false, updatable = false)
   @NonNull

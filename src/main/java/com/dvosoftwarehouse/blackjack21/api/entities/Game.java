@@ -15,11 +15,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import java.time.LocalDateTime;
 import java.util.List;
+import lombok.Getter;
 import lombok.NonNull;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 @Entity(name = "game")
+@Getter
 public class Game {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "game_id_seq")
@@ -30,7 +32,6 @@ public class Game {
           @Parameter(name = "sequence", value = "game_id_seq"),
           @Parameter(name = "fetch_size", value = "5")
       })
-  @NonNull
   private Long id;
 
   @Column(name = "label", unique = true, nullable = false)

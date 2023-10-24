@@ -21,7 +21,6 @@ public class Player {
           @Parameter(name = "sequence", value = "player_id_seq"),
           @Parameter(name = "fetch_size", value = "5")
       })
-  @NonNull
   private Long id;
 
   @Column(name = "email", unique = true, nullable = false)
